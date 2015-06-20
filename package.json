@@ -1,0 +1,19 @@
+{
+  "name": "earl-angular-macro-example",
+  "version": "1.0.0",
+  "description": "Earl Grey Angular.js Macro & Example App",
+  "main": "index.html",
+  "dependencies": {
+    "express": "^4.12.4",
+    "earlgrey-runtime": "^0.0.8"
+  },
+  "devDependencies": {
+    "browserify": "^10.2.4",
+    "earlify": "^0.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jake Russo",
+  "license": "MIT"
+}

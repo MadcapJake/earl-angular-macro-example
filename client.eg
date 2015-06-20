@@ -1,0 +1,46 @@
+globals: angular
+
+inline-macro annotate(`{^match, ^body}`):
+   arg and #symbol{name} ->
+      `{^=name, ^arg -> ^body}`
+   args and #data{*argsyms} ->
+      #data{*[argsyms each #symbol{arg} -> #value{arg}], `^args -> ^body`}
+
+countryApp = angular.module("countryApp", {"ngRoute"})
+
+chain countryApp:
+   @config with
+      annotate $routeProvider:
+         $routeProvider.route = $routeProvider.when
+         chain $routeProvider:
+            @route "/": {
+               templateUrl = "country-list.html"
+               controller = "CountryListCtrl"
+            }
+            @route "/:countryName": {
+               templateUrl = "country-detail.html"
+               controller = "CountryDetailCtrl"
+            }
+            @otherwise: {
+               redirectTo = "/"
+            }
+
+   @factory("countries") with
+      annotate $http:
+         {
+            list = cb -> $http.get("countries.json").success(cb)
+            find = (name, cb) ->
+               $http.get("countries.json").success with data ->
+                  country = data.filter(etr -> etr.name === name)[0]
+                  cb(country)
+         }
+
+   @controller("CountryListCtrl") with
+      annotate {$scope, countries}:
+         countries.list with
+            countries -> $scope.countries = countries
+
+   @controller("CountryDetailCtrl") with
+      annotate {$scope, $routeParams, countries}:
+         countries.find($routeParams.countryName) with
+            country   -> $scope.country   = country

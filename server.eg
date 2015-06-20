@@ -1,0 +1,5 @@
+require: express
+chain express():
+   @use "/": express.static(__dirname)
+   @listen: 8000
+print 'Now serving http://localhost:8000/index.html'
