@@ -1,4 +1,4 @@
-# Earl Grey Angular.js Macro & Example App
+# Earl Grey Angular Macro & Example App
 
 In an attempt to learn [Earl Grey](http://breuleux.github.io/earl-grey/) macros, I went off working on a question on EG's [gitter](https://gitter.im/breuleux/earl-grey):
 
